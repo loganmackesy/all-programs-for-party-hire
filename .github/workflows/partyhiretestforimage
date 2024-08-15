@@ -1,0 +1,86 @@
+# Import tkinter
+import tkinter as tk
+from tkinter import PhotoImage
+
+
+root = tk.Tk()
+root.title("Welcome to GeeksForGeeks") 
+root.geometry('700x500') 
+options_list = ["Option 1", "Option 2", "Option 3", "Option 4"]
+
+#image_path=PhotoImage(file=r"C:\Users\21118\OneDrive - Lynfield College\Logan mackesy Checkpoint 1\91897 and 91896 Assessment")
+#bg_image=tkinter.Label(root,image=image_path)
+#bg_image.pack()
+
+def close_window():
+    root.destroy()
+
+
+
+def calculate_amount():
+    receipt_number = int(receipt_number_entry_box.get())
+    customer_name = customer_name_entry_box.get()
+    item_hired = (item_hired_entry_box.get())
+    number_hired = int(number_hired_entry_box.get())
+
+    # Calculate the amount the customer pays based on the factors entered
+    # The implementation of this calculation is not included in the example
+
+    # Display the calculated amount in the corresponding text box
+    amount_to_pay_label.config(text=f"Amount to Pay: {calculated_amount}")
+
+
+#label to display the customer name
+customer_name_label = tk.Label(root, text="Customer Name:")
+customer_name_label.grid(column=0, row=0)
+
+customer_name_entry_box = tk.Entry(root)
+customer_name_entry_box.grid(column=1, row=0, sticky=tk.E)
+
+
+# labal to display the receipt number
+receipt_number_label = tk.Label(root, text="Receipt Number:")
+receipt_number_label.grid(column=0, row=1)
+
+receipt_number_entry_box = tk.Entry(root)
+receipt_number_entry_box.grid(column=1, row=1, sticky=tk.E)
+
+
+#label to display the item hired
+item_hired_label = tk.Label(root, text="Item hired:")
+item_hired_label.grid(column=0, row=2)
+
+item_hired_entry_box = tk.Entry(root)
+item_hired_entry_box.grid(column=1, row=2, sticky=tk.E)
+
+#label to display the number hired
+number_hired_label = tk.Label(root, text="Number hired:")
+number_hired_label.grid(column=0, row=3)
+
+number_hired_entry_box = tk.Entry(root)
+number_hired_entry_box.grid(column=1, row=3, sticky=tk.E)
+
+
+#label to display the amount to pay
+amount_to_pay_label = tk.Label(root, text="Amount to Pay:")
+amount_to_pay_label.grid(column=0, row=4)
+amount_to_pay_label.grid = tk.Entry(root)
+amount_to_pay_label.grid.grid(column=1, row=4, sticky=tk.E)
+
+# button to close the window
+close_button = tk.Button(root, text="Close", command=close_window)
+close_button.grid(column=1, row=5)
+
+close_button = tk.Button(root, text="Close", command=close_window)
+close_button.grid(column=1, row=5)
+
+
+# button to calculate
+close_button = tk.Button(root, text="calculate", command=close_window)
+close_button.grid(column=1, row=6)
+
+close_button = tk.Button(root, text="Close", command=close_window)
+close_button.grid(column=1, row=6)
+
+# Make the root window visible
+root.mainloop()
