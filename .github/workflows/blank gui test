@@ -1,0 +1,40 @@
+import tkinter as tk
+import tkinter.messagebox
+
+root = tk.Tk()
+
+
+
+
+1 = tk.Label(root, text="1:", font=("Arial", 20))
+1.pack()
+
+1 = tk.Entry(root, font=("Arial", 12)) #name entry box
+1.pack()
+
+
+2 = tk.Label(root, text="2:", font=("Arial", 20))
+2.pack()
+
+2 = tk.Entry(root, font=("Arial", 12)) #name entry box
+2.pack()
+
+
+3 = tk.Label(root, text="3:", font=("Arial", 20))
+3.pack()
+
+3 = tk.Entry(root, font=("Arial", 12)) #age entry box
+3.pack()
+
+4 = tk.Label(root, text="4:", font=("Arial", 20))
+4.pack()
+
+4 = tk.Entry(root, font=("Arial", 12)) #income entry box
+4.pack()
+
+
+
+
+
+
+root.loop() #loops code it can be repeated
