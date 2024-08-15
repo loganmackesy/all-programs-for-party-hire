@@ -1,0 +1,52 @@
+import tkinter as tk
+import tkinter.messagebox
+from tkinter import *
+root = tk.Tk()
+
+ 
+
+
+Customer_name = tk.Label(root, text="Customer_Name:", font=("Arial", 20))
+Customer_name.pack()
+
+Customer_name = tk.Entry(root, font=("Arial", 12)) #name entry box
+Customer_name.pack()
+
+
+Receipt_number = tk.Label(root, text="Receipt_number:", font=("Arial", 20))
+Receipt_number.pack()
+
+Receipt_number = tk.Entry(root, font=("Arial", 12)) #name entry box
+Receipt_number.pack()
+
+
+Item_hired = tk.Label(root, text="Item_hired:", font=("Arial", 20))
+Item_hired.pack()
+
+Item_hired = tk.Entry(root, font=("Arial", 12)) #age entry box
+Item_hired.pack()
+
+Number_hired = tk.Label(root, text="Number_hired:", font=("Arial", 20))
+Number_hired.pack()
+
+Number_hired = tk.Entry(root, font=("Arial", 12)) #income entry box
+Number_hired.pack()
+
+root.geometry("200x100") 
+  
+# Function for closing window 
+  
+  
+def Close(): 
+    root.destroy() 
+def Check():  
+  
+# Button for closing 
+exit_button = Button(root, text="Exit", command=Close) 
+exit_button.pack(pady=20)
+
+
+
+print("Hi"(customer_name)"your receipt number is"(Receipt_number)"you have ordered",Item_hired, Number_hired"times")
+
+root.loop() #loops code it can be repeated
