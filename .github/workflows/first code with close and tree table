@@ -1,0 +1,214 @@
+from tkinter import *
+from tkinter import ttk
+from tkinter import messagebox
+import tkinter.font
+
+
+
+# function for the clear button
+def clear():
+    name.delete(0, END)
+    number.delete(0, END)
+    email.delete(0, END)
+    Item.current(0)
+    hired.set(1)
+
+
+
+
+    # adding customer information into a list
+    global list1
+    list1 = [name.get(), number.get(), Item.get(), hired.get(),  email.get()]
+
+    # Clearing all the information and increasing the widget size
+    root.geometry("1500x550")
+    name.delete(0, END)
+    number.delete(0, END)
+    email.delete(0, END)
+    Item.current(0)
+    hired.set(1)
+    # Inserting customer information onto the tree view table and also creating stripped table
+    if len(tree.get_children()) % 2 == 0:
+        tree.insert("", 0, values=list1, tags="evenrow")
+    elif len(tree.get_children()) % 2 != 0:
+        tree.insert("", 0, values=list1, tags="oddrow")
+
+
+# function for search button
+def select():
+    # validating the
+    if len(search_entry.get()) == 0:
+        messagebox.showerror('name Error', 'Error: Please search for full name')
+        return
+    elif len(search_entry.get()) != 0:
+        for x in search_entry.get():
+            if x not in "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ":
+                messagebox.showerror('name Error', 'Error: Please search for valid full name')
+                search_entry.delete(0, END)
+                return
+
+    a = 0
+    list = []
+    # appending all the values in column 1 into a list
+    for child in tree.get_children():
+        list.append(tree.item(child)["values"][0])
+
+    # checking if any of the values within the list are the same as the value inputted into the search entrybox
+    for x in list:
+        if (search_entry.get().lower()) == (x.lower()):
+            id = tree.get_children()[a]
+            tree.focus(id)
+            tree.selection_set(id)
+            break
+        elif a + 1 == len(list):
+            messagebox.showerror('name Error', 'Error: the name you have searched does not exist')
+
+        a = a + 1
+    search_entry.delete(0, END)
+
+
+# Function for the delete selected function, this
+def delete():
+    if tree.item(tree.focus()) == {'text': '', 'image': '', 'values': '', 'open': 0, 'tags': ''}:
+        messagebox.showerror('name Error', 'Error: You have not selected anything')
+        return
+
+    # Validaing to check if they surely want to delete the row
+
+    def yes():
+        root2.destroy()
+        selected = tree.selection()
+        tree.delete(selected)
+
+    # if no is selected then the selected row will be unselected and nothing will be delected
+    def no():
+        root2.destroy()
+        tree.selection_remove(tree.focus())
+        tree.focus("")
+
+    # a new root where it checks for validation
+    root2 = Tk()
+    root2.geometry("150x50")
+    root2.title("Confirm")
+    label = Label(root2, text="Are you sure?")
+    label.pack()
+    frame3 = Frame(root2)
+    frame3.pack()
+    yes_button = Button(frame3, text="YES", bg="tomato2", command=yes)
+    yes_button.grid(row=2, column=0, sticky="W")
+    no_button2 = Button(frame3, text="NO", bg="light green", command=no)
+    no_button2.grid(row=2, column=1, sticky="E")
+
+    root2.mainloop()
+
+
+root = Tk()
+Desired_font = tkinter.font.Font(family="Roman", size=20, weight="bold")
+Desired_font2 = tkinter.font.Font(family="Times New Roman", size=10)
+# Asthetics of the widget 1
+root.geometry("1500x550")
+root.title("Julie's Party Hire")
+label = Label(root, text="Julie's Party Hire", font=Desired_font)
+label.grid(row=0, column=0, sticky="N")
+label = Label(root, text="")
+label.grid(column=1, columnspan=2, row=0)
+
+# frame1 inlcudes the input widget
+frame1 = LabelFrame(root, width=480, height=450, bd=2, padx=10, pady=10)
+frame1.grid(row=1, column=0, padx=10, rowspan=2)
+
+# frame2 is for the treeview table to display the information
+frame2 = Frame(root)
+frame2.grid(column=1, row=1, sticky="N")
+
+# functionality of widget 1
+# Collecting customer full name through an entry box
+name_label = Label(frame1, text="Customer full name:   ", font=Desired_font2)
+name_label.grid(row=0, column=0)
+name = Entry(frame1)
+name.grid(row=0, column=1)
+
+label = Label(frame1, text="")
+label.grid(row=1)
+
+# collecting customer reciept number through an entry box
+
+number_label = Label(frame1, text="Receipt Number:   ", font=Desired_font2)
+number_label.grid(row=2, column=0)
+number = Entry(frame1)
+number.grid(row=2, column=1)
+
+label = Label(frame1, text="")
+label.grid(row=3)
+
+# collecting which item is hired from the customer using a combobox
+
+item_label = Label(frame1, text="Item Hired:   ", font=Desired_font2)
+item_label.grid(row=4, column=0)
+list = ["Party hats", "Happy Birthday sign", "Banners", "plates", "cups", "table clothes", "part poppers",
+        "cake toppers", "decorations", "lightings", "sound equipment", "chairs", "tables", "wall draping"]
+Item = ttk.Combobox(frame1, value=list)
+Item.current(0)
+Item.grid(row=4, column=1)
+
+label = Label(frame1, text="")
+label.grid(row=5)
+
+# collecting the number of items hired by the cutomer through a slider
+
+hired_label = Label(frame1, text="Number of Items:   ", font=Desired_font2)
+hired_label.grid(row=6, column=0)
+hired = Scale(frame1, from_=1, to=500, orient='horizontal', sliderlength=10)
+hired.grid(row=6, column=1)
+
+label = Label(frame1, text="")
+label.grid(row=7)
+
+# collecting the date of return using a calender function
+
+date_label = Label(frame1, text="Date Of Return:   ", font=Desired_font2)
+date_label.grid(row=8, column=0)
+
+label = Label(frame1, text="")
+label.grid(row=9)
+
+# Collecting the customers email address through an entry box
+
+email_label = Label(frame1, text="Email Address:   ", font=Desired_font2)
+email_label.grid(row=10, column=0)
+email = Entry(frame1)
+email.grid(row=10, column=1)
+
+label = Label(frame1, text="")
+label.grid(row=11)
+
+# Adding a submit button and a clear button
+submit_button = Button(frame1, text="Submit", font=Desired_font2, bg="light green", command=submit)
+submit_button.grid(row=12, column=0)
+clear_button = Button(frame1, text="Clear", font=Desired_font2, command=clear)
+clear_button.grid(row=12, column=1)
+
+# fCreating a table to display the data
+column = ("Customer full name", "Reciept number", "Item Hired", "Number of items", "Date of return", "Email Address")
+tree = ttk.Treeview(frame2, columns=column, show="headings")
+tree.heading('Customer full name', text='Customer full name')
+tree.column("Customer full name", width=200)
+tree.heading('Reciept number', text='Reciept number')
+tree.column("Reciept number", width=100)
+tree.heading('Item Hired', text='Item Hired')
+tree.column("Item Hired", width=100)
+tree.heading("Number of items", text="Number of items")
+tree.column("Number of items", width=150)
+tree.heading("Date of return", text="Date of return")
+tree.column("Date of return", width=100)
+tree.heading("Email Address", text="Email Address")
+tree.column("Email Address", width=190)
+tree.grid(row=0, column=0, columnspan=5)
+
+# creating stripped row tags
+tree.tag_configure("oddrow", background="White")
+tree.tag_configure("evenrow", background="LightCyan2")
+
+
+
+root.mainloop()
